@@ -154,3 +154,8 @@
   text-align: left;
   padding-left: 0;
 }
+
+.lineDimensions {
+   width: 100%;
+   height: 5px;
+}

@@ -1,13 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import './App.css';
 
 
 export default function HistoryList({ list }) {
-console.log('list is now in function', list)
   return (
     <div className="styled-list">
       {list.map((list) => (
-        <li>{list}</li>
+        <li><img className="lineDimensions" src="Line.png" alt="im1"/>{list}</li>
       ))}
     </div>
   );

@@ -59,7 +59,7 @@ const { register, formState } = useForm();
           const reqList = [`state.question`, ...list];
 //          setNames(current => [...current, 'Carl']);
 
-            list.push(state.question);
+            list.unshift(state.question);
 //
 //          setList(reqList);
 
@@ -76,7 +76,7 @@ const { register, formState } = useForm();
 //                setResponseData(toLowerCase)
 //            }
             const respList = [responseMessage, ...list];
-            list.push(responseMessage)
+            list.unshift(responseMessage)
 //            setList(respList);
             setIsLoading(false)
             console.log('list2 is')
@@ -112,7 +112,7 @@ const { register, formState } = useForm();
          {responseData && !isLoading && <ClipboardCopy copyText={responseData} />}
          </div>
 
-         {isLoading ? <LoadingSpinner /> : <p>{responseData}</p>}
+         {isLoading ? <LoadingSpinner /> : ''}
 
 <ul>{<HistoryList list={list} />}</ul>
 
