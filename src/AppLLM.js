@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import ClipboardCopy from './ClipboardCopy.js'
-import LoadingSpinner from './LoadingSpinner.js'
-import HistoryList from './History.js'
 import { ButtonComponent } from '@syncfusion/ej2-react-buttons';
 
 
@@ -21,7 +19,7 @@ const { register, formState } = useForm();
       question: ""
     });
     const initialList = [];
-    const [list, setList] = useState(initialList);
+    const [list, setList] = React.useState(initialList);
     const handleChange = (e) => {
         const value = e.target.value;
         setState({
@@ -29,16 +27,19 @@ const { register, formState } = useForm();
           [e.target.name]: value
         });
       };
-      const [isLoading, setIsLoading] = useState(false);
 
     const url = 'https://api.openai.com/v1/chat/completions'
 
     async function handleSubmit(event) {
       event.preventDefault()
-      setIsLoading(true);
 
       console.log('question asked is ')
       console.log(state.question)
+
+      list.push(state.question)
+
+      console.log('list is')
+      console.log(list)
 
       const messageToPost = `Speak like a property expert when answering ${state.question}`
 
@@ -55,43 +56,26 @@ const { register, formState } = useForm();
       try {
           console.log('request data is ' )
           console.log(json)
-
-          const reqList = [`state.question`, ...list];
-//          setNames(current => [...current, 'Carl']);
-
-            list.push(state.question);
-//
-//          setList(reqList);
-
             const response = await axios.post(url, json, {headers: headers})
             const responseMessage = response.data.choices[0].message.content;
-//            console.log(reqList)
-            console.log('list1 is')
-                  console.log(list)
-
 //            if(responseMessage.charAt(0) == 'I') {
                 setResponseData(responseMessage)
 //            } else {
 //                const toLowerCase= responseMessage.charAt(0).toLowerCase() + responseMessage.slice(1)
 //                setResponseData(toLowerCase)
 //            }
-            const respList = [responseMessage, ...list];
-            list.push(responseMessage)
-//            setList(respList);
-            setIsLoading(false)
-            console.log('list2 is')
-             console.log(list)
+            list.push(responseMessage);
+            console.log('list is')
+                  console.log(list)
           } catch (err) {
             console.error(err);
-            setIsLoading(false)
           }
     }
+
     async function handleHistory(event) {
           event.preventDefault()
 
         }
-
-//        <p>{list}</p>
 
 
    return (
@@ -107,20 +91,9 @@ const { register, formState } = useForm();
            placeholder="Type in what you would like to know..."
          />
          &nbsp;
-         <div>
-         <button className="button" onClick={handleSubmit} data-inline="true">Ask away</button>
-         {responseData && !isLoading && <ClipboardCopy copyText={responseData} />}
-         </div>
-
-         {isLoading ? <LoadingSpinner /> : <p>{responseData}</p>}
-
-<ul>{<HistoryList list={list} />}</ul>
-
-
+         <button className="button" onClick={handleSubmit}>Ask away</button>
+         {responseData && <p>{responseData}</p>}
          &nbsp;
-
-
-
          &nbsp;
        </header>
        </div>
