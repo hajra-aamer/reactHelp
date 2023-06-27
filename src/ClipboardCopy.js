@@ -39,7 +39,7 @@ function ClipboardCopy({ copyText }) {
   return (
     <div>
       <button className="button" onClick={handleCopyClick} data-inline="true">
-        <span>{isCopied ? 'Copied!' : 'Copy Response'}</span>
+        <span>{isCopied ? 'Copied!' : 'Copy Last Response'}</span>
       </button>
     </div>
   );

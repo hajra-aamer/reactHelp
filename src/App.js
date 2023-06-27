@@ -107,20 +107,13 @@ const { register, formState } = useForm();
            placeholder="Type in what you would like to know..."
          />
          &nbsp;
-         <div>
          <button className="button" onClick={handleSubmit} data-inline="true">Ask away</button>
-         {responseData && !isLoading && <ClipboardCopy copyText={responseData} />}
-         </div>
-
-         {isLoading ? <LoadingSpinner /> : ''}
-
-<ul>{<HistoryList list={list} />}</ul>
-
-
          &nbsp;
-
-
-
+         &nbsp;
+         {responseData && !isLoading && <ClipboardCopy copyText={responseData} />}
+         {isLoading ? <LoadingSpinner /> : ''}
+         <ul>{<HistoryList list={list} />}</ul>
+         &nbsp;
          &nbsp;
        </header>
        </div>
