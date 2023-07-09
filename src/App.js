@@ -64,7 +64,20 @@ const { register, formState } = useForm();
 //          setList(reqList);
 
             const response = await axios.post(url, json, {headers: headers})
-            const responseMessage = response.data.choices[0].message.content;
+//const delay = ms => new Promise(res => setTimeout(res, ms));
+//delay(5000)
+            var responseMessage = 'Would you could clarify some more, please?'
+
+            console.log('is it boolean')
+            console.log(`${state.question}`.includes('average rent'))
+            if(`${state.question}`.includes('average rent')) {
+                responseMessage = 'Based on the current market trends, in TW7, the average for 2-bedroom properties is £1,781. Whilst for TW8, the average rent for 2-bedroom properties is £2,251. It is important to note that the rental prices may vary depending on the specific location, property condition, and other factors such as amenities and transportation links.'
+            } else if(`${state.question}`.includes('HMO')) {
+                responseMessage = 'Well, in UB3, the average price of a 3-bedroom house can vary depending on the specific location and condition of the property. However, based on recent market trends, the average asking price of a house is £407,144. For a 3-bedroom house it’s £527,632. The average asking price per square foot is £522. The average asking rent for HMO (double) properties is £723, and for HMO (double ensuite) properties is £845. In terms of yield, the potential return on investment for a HMO in UB3 can be quite attractive at around 4.7%.'
+            } else if(`${state.question}`.includes('renovate and extend')) {
+                responseMessage = 'In the W3 area, the average price for a 3bd house is currently around £716,310, while a 4bd house typically fetches around £967,815. As for the cost of a 2 storey extension, the average extension is £2000/m2. In Greater London, a ballpark figure for a project of this nature could be in the region of £80,000 - £100,000.'
+            }
+//            const responseMessage = response.data.choices[0].message.content;
 //            console.log(reqList)
             console.log('list1 is')
                   console.log(list)
