@@ -4,7 +4,13 @@ import axios from 'axios';
 import ClipboardCopy from './ClipboardCopy.js'
 import LoadingSpinner from './LoadingSpinner.js'
 import HistoryList from './History.js'
+import SalePickFilters from './SalePickFilters.js'
+import RentPickFilters from './RentPickFilters.js'
 import { ButtonComponent } from '@syncfusion/ej2-react-buttons';
+import {Routes, Route, useNavigate} from 'react-router-dom';
+import {BrowserRouter as Router} from 'react-router-dom';
+//import HandleSale from './HandleSale'
+//import HandleRent from './HandleRent'
 
 
 import logo from './logo.svg';
@@ -29,7 +35,25 @@ const { register, formState } = useForm();
           [e.target.name]: value
         });
       };
+
+      const handleLocationChange = (e) => {
+              const value = e.target.value;
+              setState({
+                ...state,
+                [e.target.name]: value
+              });
+            };
       const [isLoading, setIsLoading] = useState(false);
+
+    const navigate = useNavigate();
+
+    const navigateToSale = () => {
+      navigate('/sale');
+    };
+
+    const navigateToRent = () => {
+          navigate('/rent');
+        };
 
     const url = 'https://api.openai.com/v1/chat/completions'
 
@@ -99,10 +123,71 @@ const { register, formState } = useForm();
             setIsLoading(false)
           }
     }
-    async function handleHistory(event) {
-          event.preventDefault()
 
-        }
+    async function HandleSale(event) {
+    console.log('handling sale')
+                  event.preventDefault()
+                      const url = 'http://localhost:8080/http://127.0.0.1:5000/saleOrRent'
+                      event.preventDefault()
+                            console.log('postcode is ')
+                            console.log(state.postcode)
+
+                            const json = {
+                              "url": "https://www.rightmove.co.uk/property-for-sale/search.html?searchLocation=UB3%202SN&locationIdentifier=&buy=For+sale"
+                            }
+                            const headers = {
+                              'Content-Type': 'application/json'
+                            }
+
+                            try {
+                                console.log('request is ' )
+                                console.log(json)
+
+                                //create url with the postcode and Sale type
+
+                                const response = await axios.post(url, json, {headers: headers})
+
+                                } catch (err) {
+                                  console.error(err);
+                                }
+                          }
+
+    async function HandleRent(event) {
+                  event.preventDefault()
+
+                   console.log('handling rent')
+
+
+                      const url = 'https://api.openai.com/v1/chat/completions'
+                      event.preventDefault()
+                            console.log('postcode is ')
+                            console.log(state.postcode)
+
+                            const json = {
+                              "url": "gpt-3.5-turbo"
+                            }
+                            const headers = {
+                              'Content-Type': 'application/json'
+                            }
+
+                            try {
+                                console.log('request is ' )
+                                console.log(json)
+
+                                //create url with the postcode and Sale type
+
+                                const response = await axios.post(url, json, {headers: headers})
+
+                                } catch (err) {
+                                  console.error(err);
+                                }
+                          }
+
+
+    async function handleHistory(event) {
+              event.preventDefault()
+
+            }
 
 //        <p>{list}</p>
 
@@ -111,6 +196,29 @@ const { register, formState } = useForm();
        <div className="App">
        <header className="App-header">
         <img src={star} className="App-logo" alt="star" />
+         <p className="font">Sale or Rent? Type your postcode below to get started!</p>
+         <textarea className="textbox"
+                    name="postcode"
+                    value={state.postcode}
+                    onChange={handleLocationChange}
+//                    rows={5}
+                    placeholder="Type postcode here"
+                  />
+         <button className="button" value="sale" onClick={navigateToSale} data-inline="true">For Sale</button>
+         <button className="button" value="rent" onClick={navigateToRent} data-inline="true">To Rent</button>
+
+         <Routes>
+                   <Route path="/sale" element={<SalePickFilters location={state.postcode}/>} />
+                   <Route path="/rent" element={<RentPickFilters location={state.postcode}/>} />
+         </Routes>
+
+
+         <div>&nbsp;</div>
+         <div>&nbsp;</div>
+         <div>&nbsp;</div>
+         <div>&nbsp;</div>
+         <img className="lineDimensions" src="Line.png" alt="im1"/>
+
          <p className="font">Confused about properties?<br></br>Ask our AI property expert.</p>
          <textarea className="textbox"
            name="question"
@@ -134,3 +242,4 @@ const { register, formState } = useForm();
 }
 
 export default App;
+
