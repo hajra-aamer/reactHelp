@@ -7,7 +7,7 @@ import HistoryList from './History.js'
 import SalePickFilters from './SalePickFilters.js'
 import RentPickFilters from './RentPickFilters.js'
 import { ButtonComponent } from '@syncfusion/ej2-react-buttons';
-import {Routes, Route, useNavigate} from 'react-router-dom';
+import {Routes, Route, useNavigate, Link} from 'react-router-dom';
 import {BrowserRouter as Router} from 'react-router-dom';
 //import HandleSale from './HandleSale'
 //import HandleRent from './HandleRent'
@@ -48,7 +48,7 @@ const { register, formState } = useForm();
     const navigate = useNavigate();
 
     const navigateToSale = () => {
-      navigate('/sale');
+      navigate('/sale/*');
     };
 
     const navigateToRent = () => {
@@ -208,8 +208,8 @@ const { register, formState } = useForm();
          <button className="button" value="rent" onClick={navigateToRent} data-inline="true">To Rent</button>
 
          <Routes>
-                   <Route path="/sale" element={<SalePickFilters location={state.postcode}/>} />
-                   <Route path="/rent" element={<RentPickFilters location={state.postcode}/>} />
+                   <Route path="/sale/*" element={<SalePickFilters location={state.postcode}/>} />
+                   <Route path="/rent/*" element={<RentPickFilters location={state.postcode}/>} />
          </Routes>
 
 

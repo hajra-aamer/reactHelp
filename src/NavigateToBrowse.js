@@ -1,23 +1,15 @@
 import React, { useState } from "react";
 import './App.css';
-import NavigateToBrowse from './NavigateToBrowse'
 import logo from './logo.svg';
 import star from './star.png'
 import axios from 'axios';
-import {Routes, Route, useNavigate} from 'react-router-dom';
-import {BrowserRouter as Router} from 'react-router-dom';
 
 
-function SalePickFilters({ location }) {
-  console.log('postcode is ' + location)
-
-  const navigate = useNavigate();
-
-  const navigateToBrowse = () => {
-        navigate('/browse');
- };
+export default function NavigateToBrowse() {
 
   async function handleBrowse(event) {
+
+  console.log('in browsing')
             event.preventDefault()
             // encode the location
             // create the url
@@ -50,27 +42,17 @@ function SalePickFilters({ location }) {
              }
 
              try {
-             console.log('about to post the url')
                  const response = await axios.post(url, json, {headers: headers})
+                 console.log(response)
+
+                  return (
+                          <div className="App">
+                                <p className="font">response is {response}</p>
+                          </div>
+                            );
              } catch (err) {
                  console.error(err);
              }
   }
-
-  console.log('outside of handle browse to post the url')
-
-  if(!!location) {
-     const title = 'Please pick sale filters for ' + location
-     return (
-        <div className="App">
-              <p className="font">{title}</p>
-              <button className="button" onClick={handleBrowse} data-inline="true">Browse location</button>
-        </div>
-          );
-  } else {
-      return "";
-  }
-}
-
-export default SalePickFilters;
+ }
 
