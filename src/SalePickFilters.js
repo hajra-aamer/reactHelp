@@ -17,7 +17,11 @@ function SalePickFilters({ location }) {
         navigate('/browse');
  };
 
-  async function handleBrowse(event) {
+ <Routes>
+                    <Route path="/browse" element={<NavigateToBrowse/>} />
+          </Routes>
+
+  async function handleBrowse(event, props) {
             event.preventDefault()
             // encode the location
             // create the url
@@ -50,8 +54,22 @@ function SalePickFilters({ location }) {
              }
 
              try {
+             event.preventDefault();
              console.log('about to post the url')
                  const response = await axios.post(url, json, {headers: headers})
+                 debugger;
+                 console.log('posted now should be returning')
+                 navigate("/browse",{state :{ name : "raeon"}, replace:true})
+
+
+//                 return props.history.push(`/browse`)
+//                 return (
+//                                           <div className="App">
+//                                                 <p className="font">response is {response}</p>
+//                                           </div>
+//                                             );
+//                 return (<NavigateToBrowse/>)
+
              } catch (err) {
                  console.error(err);
              }

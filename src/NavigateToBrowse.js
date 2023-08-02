@@ -7,6 +7,8 @@ import axios from 'axios';
 
 export default function NavigateToBrowse() {
 
+console.log('in browsing')
+
   async function handleBrowse(event) {
 
   console.log('in browsing')
@@ -54,5 +56,13 @@ export default function NavigateToBrowse() {
                  console.error(err);
              }
   }
+
+  return (
+          <div className="App">
+          const number =
+                <p className="font">X number of properties found</p>
+                <button className="button" onClick={handleBrowse} data-inline="true">Browse location</button>
+          </div>
+            );
  }
 

@@ -6,6 +6,7 @@ import LoadingSpinner from './LoadingSpinner.js'
 import HistoryList from './History.js'
 import SalePickFilters from './SalePickFilters.js'
 import RentPickFilters from './RentPickFilters.js'
+import NavigateToBrowse from './NavigateToBrowse.js'
 import { ButtonComponent } from '@syncfusion/ej2-react-buttons';
 import {Routes, Route, useNavigate, Link} from 'react-router-dom';
 import {BrowserRouter as Router} from 'react-router-dom';
@@ -210,6 +211,7 @@ const { register, formState } = useForm();
          <Routes>
                    <Route path="/sale/*" element={<SalePickFilters location={state.postcode}/>} />
                    <Route path="/rent/*" element={<RentPickFilters location={state.postcode}/>} />
+                   <Route path="/browse" element={<NavigateToBrowse/>} />
          </Routes>
 
 
