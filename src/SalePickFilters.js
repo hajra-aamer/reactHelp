@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState} from "react";
 import './App.css';
 import NavigateToBrowse from './NavigateToBrowse'
 import logo from './logo.svg';
@@ -62,18 +62,21 @@ function SalePickFilters({ location, props}) {
              try {
              event.preventDefault();
              console.log('about to post the url')
-                 const response = await axios.post(url, json, {headers: headers})
-
-                 setState({
-                     ...state,
-                     properties: response
-                 });
-
-                console.log('setting state of properties to be ' + state.properties)
-
-                 debugger;
-                 console.log('posted now should be returning')
-                 navigate("/browse",{state :this.state, replace:true})
+//                 const response = await axios.post(url, json, {headers: headers})
+//
+//                 console.log('response i want to display is ')
+//                 console.log("%j", response.data)
+//
+//                 setState({
+//                     ...state,
+//                     properties: response.data
+//                 });
+//
+//                console.log('setting state of properties to be ' + state.properties)
+//
+//                 debugger;
+//                 console.log('posted now should be returning')
+                 navigate("/browse")
 
 
 //                 return props.history.push(`/browse`)
