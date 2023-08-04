@@ -8,8 +8,14 @@ import {Routes, Route, useNavigate} from 'react-router-dom';
 import {BrowserRouter as Router} from 'react-router-dom';
 
 
-function SalePickFilters({ location }) {
+function SalePickFilters({ location, props}) {
+
   console.log('postcode is ' + location)
+  console.log('props is ' + props)
+
+  const [state, setState] = useState({
+        properties: ""
+      });
 
   const navigate = useNavigate();
 
@@ -18,8 +24,8 @@ function SalePickFilters({ location }) {
  };
 
  <Routes>
-                    <Route path="/browse" element={<NavigateToBrowse/>} />
-          </Routes>
+      <Route path="/browse" render={(props) => <NavigateToBrowse {...props}/>} />
+ </Routes>
 
   async function handleBrowse(event, props) {
             event.preventDefault()
@@ -57,9 +63,17 @@ function SalePickFilters({ location }) {
              event.preventDefault();
              console.log('about to post the url')
                  const response = await axios.post(url, json, {headers: headers})
+
+                 setState({
+                     ...state,
+                     properties: response
+                 });
+
+                console.log('setting state of properties to be ' + state.properties)
+
                  debugger;
                  console.log('posted now should be returning')
-                 navigate("/browse",{state :{ name : "raeon"}, replace:true})
+                 navigate("/browse",{state :this.state, replace:true})
 
 
 //                 return props.history.push(`/browse`)

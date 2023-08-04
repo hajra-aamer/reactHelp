@@ -21,9 +21,9 @@ import './App.css';
 axios.defaults.xsrfCookieName = 'CSRF-TOKEN';
 axios.defaults.xsrfHeaderName = 'X-CSRF-Token';
 
-function App() {
+function App(props) {
 const { register, formState } = useForm();
-    let [responseData, setResponseData] = React.useState('')
+    let [AIresponseData, setAIResponseData] = React.useState('')
     const [state, setState] = useState({
       question: ""
     });
@@ -108,10 +108,10 @@ const { register, formState } = useForm();
                   console.log(list)
 
 //            if(responseMessage.charAt(0) == 'I') {
-                setResponseData(responseMessage)
+                setAIResponseData(responseMessage)
 //            } else {
 //                const toLowerCase= responseMessage.charAt(0).toLowerCase() + responseMessage.slice(1)
-//                setResponseData(toLowerCase)
+//                setAIResponseData(toLowerCase)
 //            }
             const respList = [responseMessage, ...list];
             list.unshift(responseMessage)
@@ -233,7 +233,7 @@ const { register, formState } = useForm();
          <button className="button" onClick={handleSubmit} data-inline="true">Ask away</button>
          &nbsp;
          &nbsp;
-         {responseData && !isLoading && <ClipboardCopy copyText={responseData} />}
+         {AIresponseData && !isLoading && <ClipboardCopy copyText={AIresponseData} />}
          {isLoading ? <LoadingSpinner /> : ''}
          <ul>{<HistoryList list={list} />}</ul>
          &nbsp;

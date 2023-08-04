@@ -5,9 +5,10 @@ import star from './star.png'
 import axios from 'axios';
 
 
-export default function NavigateToBrowse() {
+export default function NavigateToBrowse(props, state) {
 
-console.log('in browsing')
+console.log('in browsing.. properties are')
+console.log(state.properties)
 
   async function handleBrowse(event) {
 
