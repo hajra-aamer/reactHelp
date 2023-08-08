@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import axios from "axios";
-import ClipboardCopy from "./ClipboardCopy.js";
-import LoadingSpinner from "./LoadingSpinner.js";
-import HistoryList from "./History.js";
+import ClipboardCopy from "../ClipboardCopy.js";
+import LoadingSpinner from "../LoadingSpinner.js";
+import HistoryList from "../History.js";
 import SalePickFilters from "./SalePickFilters.js";
 import RentPickFilters from "./RentPickFilters.js";
 import NavigateToBrowse from "./NavigateToBrowse.js";
 import { Routes, Route, useNavigate } from "react-router-dom";
-import star from "./star.png";
-import "./App.css";
-import { responseContext } from "./context/responseContext.js";
+import star from "../star.png";
+import "../styling/App.css";
+import { responseContext } from "../context/responseContext.js";
 
 axios.defaults.xsrfCookieName = "CSRF-TOKEN";
 axios.defaults.xsrfHeaderName = "X-CSRF-Token";

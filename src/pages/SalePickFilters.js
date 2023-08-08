@@ -1,8 +1,8 @@
 import React, { useState} from "react";
-import './App.css';
+import '../styling/App.css';
 import NavigateToBrowse from './NavigateToBrowse'
-import logo from './logo.svg';
-import star from './star.png'
+import logo from '../logo.svg';
+import star from '../star.png'
 import axios from 'axios';
 import {Routes, Route, useNavigate} from 'react-router-dom';
 import {BrowserRouter as Router} from 'react-router-dom';
@@ -16,6 +16,8 @@ function SalePickFilters({ location, props}) {
   const [state, setState] = useState({
         properties: ""
       });
+
+  //get the locationId
 
   const navigate = useNavigate();
 

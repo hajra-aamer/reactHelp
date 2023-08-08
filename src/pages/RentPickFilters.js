@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import './App.css';
-import logo from './logo.svg';
-import star from './star.png'
+import '../styling/App.css';
+import logo from '../logo.svg';
+import star from '../star.png'
 
 
 export default function RentPickFilters({ location }) {

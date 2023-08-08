@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
-import SalePickFilters from './SalePickFilters';
-import RentPickFilters from './RentPickFilters';
-import NavigateToBrowse from './NavigateToBrowse';
+import App from './pages/App';
+import SalePickFilters from './pages/SalePickFilters';
+import RentPickFilters from './pages/RentPickFilters';
+import NavigateToBrowse from './pages/NavigateToBrowse';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import {Routes, Route, useNavigate} from 'react-router-dom';
