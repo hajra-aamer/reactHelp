@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useContext } from "react";
 import "../styling/App.css";
 import axios from "axios";
-import { responseContext, locationContext } from "../context/responseContext.js";
+import {
+  responseContext,
+  locationContext,
+} from "../context/responseContext.js";
 
 export default function NavigateToBrowse(props, state) {
-//  const { response } = useContext(responseContext);
-  const { location } = useContext(locationContext);
-  console.log(response);
   console.log("in browsing");
   const maxBedrooms = "";
   const minBedrooms = "";
@@ -20,8 +20,8 @@ export default function NavigateToBrowse(props, state) {
   const dontShow = "";
   const furnishTypes = "";
   const keywords = "";
-
-  const [response, setResponse] = useState({});
+  // first, access the response setResponse
+  const { response, setResponse } = useContext(responseContext);
 
   const url = `http://localhost:8080/http://127.0.0.1:5000/properties`;
 
@@ -38,12 +38,12 @@ export default function NavigateToBrowse(props, state) {
 
   useEffect(() => {
     const fetchData = async () => {
-       const response = await axios.post(url, json, { headers: headers });
-       setListing(response.data);
-       console.log("final response is ");
-
-       console.log(response.data);
-        setResponse(response.data)
+      try {
+        const newResponse = await axios.post(url, json, { headers: headers });
+        setResponse(newResponse);
+      } catch (error) {
+        throw new Error(error);
+      }
     };
 
     fetchData();
@@ -60,13 +60,13 @@ export default function NavigateToBrowse(props, state) {
   }
 
   return (
-   <responseContext.Provider value={{ response, setResponse }}>
-    <div className="App">
-      const number =<p className="font">X number of properties found</p>
-      <button className="button" onClick={handleBrowse} data-inline="true">
-        Browse location
-      </button>
-      {response[0].map((item, index) => {
+    <responseContext.Provider value={{ response, setResponse }}>
+      <div className="App">
+        const number =<p className="font">X number of properties found</p>
+        <button className="button" onClick={handleBrowse} data-inline="true">
+          Browse location
+        </button>
+        {/* {response[0].map((item, index) => {
         return (
           <div key={index}>
             <img src={item.propertyImages.images[0].srcUrl} alt="" />
@@ -74,8 +74,8 @@ export default function NavigateToBrowse(props, state) {
             <p>{item.displayAddress}</p>
           </div>
         );
-      })}
-    </div>
+      })} */}
+      </div>
     </responseContext.Provider>
   );
 }
