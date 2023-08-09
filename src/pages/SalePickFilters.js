@@ -6,6 +6,7 @@ import star from '../star.png'
 import axios from 'axios';
 import {Routes, Route, useNavigate} from 'react-router-dom';
 import {BrowserRouter as Router} from 'react-router-dom';
+import Checkbox from '../components/Checkbox'
 
 
 function SalePickFilters({ location, props}) {
@@ -14,7 +15,8 @@ function SalePickFilters({ location, props}) {
   console.log('props is ' + props)
 
   const [state, setState] = useState({
-        properties: ""
+        properties: "",
+        selectRadius: ""
       });
 
    const [open, setOpen] = React.useState(false);
@@ -31,6 +33,17 @@ function SalePickFilters({ location, props}) {
         navigate('/browse');
  };
 
+ const [selectRadius, setSelectRadius] = useState(null);
+
+ const handleChange = (e) => {
+ console.log('handling change ' + e.target.value)
+     const { value, name } = e.target;
+     setState({
+       ...state,
+       [name]: value,
+     });
+   };
+
  <Routes>
       <Route path="/browse" render={(props) => <NavigateToBrowse {...props}/>} />
  </Routes>
@@ -41,11 +54,14 @@ function SalePickFilters({ location, props}) {
             // create the url
             // send to the backend
 
+const selectRadius = '';
+            console.log('selectRadius is ' + state.selectRadius)
+
             const maxBedrooms = '';
             const minBedrooms = '';
             const maxPrice = '';
             const minPrice = '';
-            const radius = '';
+            const radius = state.selectRadius;
             const propertyTypes = '';
             const maxDaysSinceAdded = '';
             const includeSSTC = false;
@@ -111,8 +127,8 @@ function SalePickFilters({ location, props}) {
         <div className="App">
               <p className="font">{title}</p>
               <div>
-              <p className="font-filter">Select radius</p>
-                            <select name="selectRadius" id="selectRadius">
+              <span className="font-filter">Select radius</span>
+                            <select className= "dropdown" name="selectRadius" id="selectRadius" onChange={handleChange}>
                               <option value="0.0">This area only</option>
                               <option value="0.25">Within 1/4 mile</option>
                               <option value="0.5">Within 1/2 mile</option>
@@ -127,8 +143,8 @@ function SalePickFilters({ location, props}) {
                             </select>
               </div>
               <div>
-               <p className="font-filter">Property Type</p>
-                                          <select name="selectPropertyType" id="selectPropertyType">
+               <span className="font-filter">Property Type</span>
+                                          <select className= "dropdown" name="selectPropertyType" id="selectPropertyType">
                                             <option value="" selected="selected">Any</option>
                                             <option value="houses">Houses</option>
                                             <option value="flats">Flats/Apartments</option>
@@ -138,7 +154,164 @@ function SalePickFilters({ location, props}) {
                                             <option value="other">Other</option>
                                             <option value="50.0">Within 50 miles</option>
                                           </select>
-                            </div>
+               </div>
+               <div>
+                              <span className="font-filter">Price Range (£)</span>
+                                                         <select className= "dropdown" className= "dropdown" name="selectPriceMin" id="selectPriceMin">
+                                                           <option value="" selected="selected">No min</option>
+                                                           <option value="50000">50,000</option>
+                                                           <option value="60000">60,000</option>
+                                                           <option value="70000">70,000</option>
+                                                           <option value="80000">80,000</option>
+                                                           <option value="90000">90,000</option>
+                                                           <option value="100000">100,000</option>
+                                                           <option value="110000">110,000</option>
+                                                           <option value="120000">120,000</option>
+                                                           <option value="125000">125,000</option>
+                                                           <option value="130000">130,000</option>
+                                                           <option value="140000">140,000</option>
+                                                           <option value="150000">150,000</option>
+                                                           <option value="160000">160,000</option>
+                                                           <option value="170000">170,000</option>
+                                                           <option value="175000">175,000</option>
+                                                           <option value="180000">180,000</option>
+                                                           <option value="190000">190,000</option>
+                                                           <option value="200000">200,000</option>
+                                                           <option value="210000">210,000</option>
+                                                           <option value="220000">220,000</option>
+                                                           <option value="230000">230,000</option>
+                                                           <option value="240000">240,000</option>
+                                                           <option value="250000">250,000</option>
+                                                           <option value="260000">260,000</option>
+                                                           <option value="270000">270,000</option>
+                                                           <option value="280000">280,000</option>
+                                                           <option value="290000">290,000</option>
+                                                           <option value="300000">300,000</option>
+                                                           <option value="325000">325,000</option>
+                                                           <option value="350000">350,000</option>
+                                                           <option value="375000">375,000</option>
+                                                           <option value="400000">400,000</option>
+                                                           <option value="425000">425,000</option>
+                                                           <option value="450000">450,000</option>
+                                                           <option value="475000">475,000</option>
+                                                           <option value="500000">500,000</option>
+                                                           <option value="550000">550,000</option>
+                                                           <option value="600000">600,000</option>
+                                                           <option value="650000">650,000</option>
+                                                           <option value="700000">700,000</option>
+                                                           <option value="800000">800,000</option>
+                                                           <option value="900000">900,000</option>
+                                                           <option value="1000000">1,000,000</option>
+                                                           <option value="1250000">1,250,000</option>
+                                                           <option value="1500000">1,500,000</option>
+                                                           <option value="1750000">1,750,000</option>
+                                                           <option value="2000000">2,000,000</option>
+                                                           <option value="2500000">2,500,000</option>
+                                                           <option value="3000000">3,000,000</option>
+                                                           <option value="4000000">4,000,000</option>
+                                                           <option value="5000000">5,000,000</option>
+                                                           <option value="7000000">7,000,000</option>
+                                                           <option value="10000000">10,000,000</option>
+                                                           <option value="15000000">15,000,000</option>
+                                                           <option value="20000000">20,000,000</option>
+                                                         </select>
+                                                         <select className= "dropdown" name="selectPriceMax" id="selectPriceMax">
+                                                            <option value="" selected="selected">No max</option>
+                                                            <option value="" selected="selected">No min</option>
+                                                                                                                       <option value="50000">50,000</option>
+                                                                                                                       <option value="60000">60,000</option>
+                                                                                                                       <option value="70000">70,000</option>
+                                                                                                                       <option value="80000">80,000</option>
+                                                                                                                       <option value="90000">90,000</option>
+                                                                                                                       <option value="100000">100,000</option>
+                                                                                                                       <option value="110000">110,000</option>
+                                                                                                                       <option value="120000">120,000</option>
+                                                                                                                       <option value="125000">125,000</option>
+                                                                                                                       <option value="130000">130,000</option>
+                                                                                                                       <option value="140000">140,000</option>
+                                                                                                                       <option value="150000">150,000</option>
+                                                                                                                       <option value="160000">160,000</option>
+                                                                                                                       <option value="170000">170,000</option>
+                                                                                                                       <option value="175000">175,000</option>
+                                                                                                                       <option value="180000">180,000</option>
+                                                                                                                       <option value="190000">190,000</option>
+                                                                                                                       <option value="200000">200,000</option>
+                                                                                                                       <option value="210000">210,000</option>
+                                                                                                                       <option value="220000">220,000</option>
+                                                                                                                       <option value="230000">230,000</option>
+                                                                                                                       <option value="240000">240,000</option>
+                                                                                                                       <option value="250000">250,000</option>
+                                                                                                                       <option value="260000">260,000</option>
+                                                                                                                       <option value="270000">270,000</option>
+                                                                                                                       <option value="280000">280,000</option>
+                                                                                                                       <option value="290000">290,000</option>
+                                                                                                                       <option value="300000">300,000</option>
+                                                                                                                       <option value="325000">325,000</option>
+                                                                                                                       <option value="350000">350,000</option>
+                                                                                                                       <option value="375000">375,000</option>
+                                                                                                                       <option value="400000">400,000</option>
+                                                                                                                       <option value="425000">425,000</option>
+                                                                                                                       <option value="450000">450,000</option>
+                                                                                                                       <option value="475000">475,000</option>
+                                                                                                                       <option value="500000">500,000</option>
+                                                                                                                       <option value="550000">550,000</option>
+                                                                                                                       <option value="600000">600,000</option>
+                                                                                                                       <option value="650000">650,000</option>
+                                                                                                                       <option value="700000">700,000</option>
+                                                                                                                       <option value="800000">800,000</option>
+                                                                                                                       <option value="900000">900,000</option>
+                                                                                                                       <option value="1000000">1,000,000</option>
+                                                                                                                       <option value="1250000">1,250,000</option>
+                                                                                                                       <option value="1500000">1,500,000</option>
+                                                                                                                       <option value="1750000">1,750,000</option>
+                                                                                                                       <option value="2000000">2,000,000</option>
+                                                                                                                       <option value="2500000">2,500,000</option>
+                                                                                                                       <option value="3000000">3,000,000</option>
+                                                                                                                       <option value="4000000">4,000,000</option>
+                                                                                                                       <option value="5000000">5,000,000</option>
+                                                                                                                       <option value="7000000">7,000,000</option>
+                                                                                                                       <option value="10000000">10,000,000</option>
+                                                                                                                       <option value="15000000">15,000,000</option>
+                                                                                                                       <option value="20000000">20,000,000</option>
+                                                         </select>
+                              </div>
+
+                              <div>
+                                 <span className="font-filter">No. of bedrooms</span>
+                                   <select className= "dropdown" name="selectNoOfBedrooms" id="selectNoOfBedrooms">
+                                       <option value="" selected="selected">No min</option>
+                                       <option value="0">Studio</option>
+                                       <option value="1">1</option>
+                                       <option value="2">2</option>
+                                       <option value="3">3</option>
+                                       <option value="4">4</option>
+                                       <option value="5">5</option>
+                                   </select>
+                                   <select className= "dropdown" name="selectNoOfBedrooms" id="selectNoOfBedrooms">
+                                       <option value="" selected="selected">No max</option>
+                                       <option value="0">Studio</option>
+                                       <option value="1">1</option>
+                                       <option value="2">2</option>
+                                       <option value="3">3</option>
+                                       <option value="4">4</option>
+                                       <option value="5">5</option>
+                                   </select>
+                              </div>
+
+                              <div>
+                                  <span className="font-filter">Added to site</span>
+                                    <select className= "dropdown" name="selectNoOfBedrooms" id="selectNoOfBedrooms">
+                                       <option value="" selected="selected">Anytime</option>
+                                       <option value="1">Last 24 hours</option>
+                                       <option value="3">Last 3 days</option>
+                                       <option value="7">Last 7 days</option>
+                                       <option value="14">Last 14 days</option>
+                                    </select>
+                              </div>
+
+                              <Checkbox className="font-filter" label="Include Under Offer, Sold STC... (?)" />
+
+
               <button className="button" onClick={handleBrowse} data-inline="true">Browse location</button>
         </div>
           );

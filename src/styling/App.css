@@ -38,6 +38,19 @@
   font-weight: bold;
 }
 
+.checkbox {
+  background-color: #f7c15b;
+  color: #2c0149;
+}
+
+.dropdown {
+    font-family: "Lucida Console", "Courier New", monospace;
+    font-size: calc(10px + 0.5vmin);
+    margin-bottom: 2px;
+    background-color: #f7c15b;
+    color: #2c0149;
+   }
+
 ::placeholder {
    color: #2c0149;
 }
