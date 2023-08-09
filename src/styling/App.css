@@ -61,6 +61,12 @@
     font-weight: bold;
    }
 
+.font-filter {
+    font-family: "Lucida Console", "Courier New", monospace;
+    font-size: calc(10px + 1vmin);
+    margin-bottom: 2px;
+   }
+
 
 .button {
 	background: #2c0149;

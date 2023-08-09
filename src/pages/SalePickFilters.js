@@ -17,6 +17,12 @@ function SalePickFilters({ location, props}) {
         properties: ""
       });
 
+   const [open, setOpen] = React.useState(false);
+
+     const handleOpen = () => {
+       setOpen(!open);
+     };
+
   //get the locationId
 
   const navigate = useNavigate();
@@ -92,6 +98,9 @@ function SalePickFilters({ location, props}) {
              } catch (err) {
                  console.error(err);
              }
+
+             // Search radius correclates to &radius=0.5
+             // search property type to &displayPropertyType=houses
   }
 
   console.log('outside of handle browse to post the url')
@@ -101,6 +110,35 @@ function SalePickFilters({ location, props}) {
      return (
         <div className="App">
               <p className="font">{title}</p>
+              <div>
+              <p className="font-filter">Select radius</p>
+                            <select name="selectRadius" id="selectRadius">
+                              <option value="0.0">This area only</option>
+                              <option value="0.25">Within 1/4 mile</option>
+                              <option value="0.5">Within 1/2 mile</option>
+                              <option value="1.0">Within 1 mile</option>
+                              <option value="3.0">Within 3 miles</option>
+                              <option value="5.0">Within 5 miles</option>
+                              <option value="10.0">Within 10 miles</option>
+                              <option value="15.0">Within 15 miles</option>
+                              <option value="30.0">Within 30 miles</option>
+                              <option value="40.0">Within 40 miles</option>
+                              <option value="50.0">Within 50 miles</option>
+                            </select>
+              </div>
+              <div>
+               <p className="font-filter">Property Type</p>
+                                          <select name="selectPropertyType" id="selectPropertyType">
+                                            <option value="" selected="selected">Any</option>
+                                            <option value="houses">Houses</option>
+                                            <option value="flats">Flats/Apartments</option>
+                                            <option value="bungalows">Bungalows</option>
+                                            <option value="land">Land</option>
+                                            <option value="commercial">Commercial Property</option>
+                                            <option value="other">Other</option>
+                                            <option value="50.0">Within 50 miles</option>
+                                          </select>
+                            </div>
               <button className="button" onClick={handleBrowse} data-inline="true">Browse location</button>
         </div>
           );
