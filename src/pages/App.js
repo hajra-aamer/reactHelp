@@ -102,7 +102,6 @@ function App(props) {
 
     try {
       // const response = await axios.post(url, json, { headers: headers });
-      // const response = [1, 2, 3, 4];
       setResponse(response)
       console.log(response);
       navigateToSale();

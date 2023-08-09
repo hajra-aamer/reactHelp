@@ -4,7 +4,7 @@ import axios from "axios";
 import { responseContext, locationContext } from "../context/responseContext.js";
 
 export default function NavigateToBrowse(props, state) {
-  const { response } = useContext(responseContext);
+//  const { response } = useContext(responseContext);
   const { location } = useContext(locationContext);
   console.log(response);
   console.log("in browsing");
@@ -21,6 +21,8 @@ export default function NavigateToBrowse(props, state) {
   const furnishTypes = "";
   const keywords = "";
 
+  const [response, setResponse] = useState({});
+
   const url = `http://localhost:8080/http://127.0.0.1:5000/properties`;
 
   const rightmoveUrl = `https://www.rightmove.co.uk/property-for-sale/find.html?maxBedrooms=${maxBedrooms}&locationIdentifier=OUTCODE%5E2737&minBedrooms=${minBedrooms}&maxPrice=${maxPrice}&minPrice=${minPrice}&radius=${radius}&propertyTypes=${propertyTypes}&maxDaysSinceAdded=${maxDaysSinceAdded}&includeSSTC=${includeSSTC}&mustHave=${mustHave}&dontShow=${dontShow}&furnishTypes=${furnishTypes}&keywords=${keywords}`;
@@ -36,10 +38,12 @@ export default function NavigateToBrowse(props, state) {
 
   useEffect(() => {
     const fetchData = async () => {
-      // const response = await axios.post(url, json, { headers: headers });
-      // setListing(response.data);
-      // console.log("final response is ");
-      // console.log(response.data);
+       const response = await axios.post(url, json, { headers: headers });
+       setListing(response.data);
+       console.log("final response is ");
+
+       console.log(response.data);
+        setResponse(response.data)
     };
 
     fetchData();
@@ -56,6 +60,7 @@ export default function NavigateToBrowse(props, state) {
   }
 
   return (
+   <responseContext.Provider value={{ response, setResponse }}>
     <div className="App">
       const number =<p className="font">X number of properties found</p>
       <button className="button" onClick={handleBrowse} data-inline="true">
@@ -71,5 +76,6 @@ export default function NavigateToBrowse(props, state) {
         );
       })}
     </div>
+    </responseContext.Provider>
   );
 }
