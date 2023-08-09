@@ -5,7 +5,7 @@ import { ButtonComponent } from '@syncfusion/ej2-react-buttons';
 
 import logo from './logo.svg';
 import star from './star.png'
-import './App.css';
+import './styling/App.css';
 
 axios.defaults.xsrfCookieName = 'CSRF-TOKEN';
 axios.defaults.xsrfHeaderName = 'X-CSRF-Token';
