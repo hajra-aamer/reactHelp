@@ -3,7 +3,6 @@ import "../styling/App.css";
 import axios from "axios";
 import {
   responseContext,
-  locationContext,
 } from "../context/responseContext.js";
 
 export default function NavigateToBrowse(props, state) {
@@ -37,13 +36,18 @@ export default function NavigateToBrowse(props, state) {
   const [Listing, setListing] = useState([]);
 
   useEffect(() => {
+  // TODO THIS RESPONSE IS WHAT I WANT TO DIS|PLAY IN THE HTML BELOW
     const fetchData = async () => {
-      try {
-        const newResponse = await axios.post(url, json, { headers: headers });
-        setResponse(newResponse);
-      } catch (error) {
-        throw new Error(error);
-      }
+    const response = await axios.post(url, json, { headers: headers });
+          // setListing(response.data);
+           console.log("final response is ");
+           console.log(response.data);
+//      try {
+//        const newResponse = await axios.post(url, json, { headers: headers });
+        setResponse(response.data);
+//      } catch (error) {
+//        throw new Error(error);
+//      }
     };
 
     fetchData();
