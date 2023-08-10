@@ -146,7 +146,7 @@ function App(props) {
   }
 
   //        <p>{list}</p>
-  const [response, setResponse] = useState({});
+  const [response, setResponse] = useState([[{}]]);
   const [postcode, setPostcode] = useState('');
 
   return (
