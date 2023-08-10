@@ -16,7 +16,8 @@ function SalePickFilters({ location, props}) {
 
   const [state, setState] = useState({
         properties: "",
-        selectRadius: ""
+        selectRadius: "",
+        maxBedrooms: ""
       });
 
    const [open, setOpen] = React.useState(false);
@@ -33,10 +34,7 @@ function SalePickFilters({ location, props}) {
         navigate('/browse');
  };
 
- const [selectRadius, setSelectRadius] = useState(null);
-
  const handleChange = (e) => {
- console.log('handling change ' + e.target.value)
      const { value, name } = e.target;
      setState({
        ...state,
@@ -55,14 +53,18 @@ function SalePickFilters({ location, props}) {
             // send to the backend
 
 const selectRadius = '';
+const maxBedrooms = '';
             console.log('selectRadius is ' + state.selectRadius)
+            console.log('maxBedrooms is ' + state.maxBedrooms)
+            console.log('minBedrooms is ' + state.minBedrooms)
+            console.log('minPRices is ' + state.minPrice)
+            console.log('maxPrice is ' + state.maxPrice)
 
-            const maxBedrooms = '';
-            const minBedrooms = '';
-            const maxPrice = '';
-            const minPrice = '';
+            const minBedrooms = state.minBedrooms;
+            const maxPrice = state.maxPrice;
+            const minPrice = state.minPrice;
             const radius = state.selectRadius;
-            const propertyTypes = '';
+            const propertyTypes = state.noOfBedrooms;
             const maxDaysSinceAdded = '';
             const includeSSTC = false;
             const mustHave = '';
@@ -144,7 +146,7 @@ const selectRadius = '';
               </div>
               <div>
                <span className="font-filter">Property Type</span>
-                                          <select className= "dropdown" name="selectPropertyType" id="selectPropertyType">
+                                          <select className= "dropdown" name="propertyType" id="propertyType" onChange={handleChange}>
                                             <option value="" selected="selected">Any</option>
                                             <option value="houses">Houses</option>
                                             <option value="flats">Flats/Apartments</option>
@@ -157,7 +159,7 @@ const selectRadius = '';
                </div>
                <div>
                               <span className="font-filter">Price Range (£)</span>
-                                                         <select className= "dropdown" className= "dropdown" name="selectPriceMin" id="selectPriceMin">
+                                                         <select className= "dropdown" className= "dropdown" name="minPrice" id="minPrice" onChange={handleChange}>
                                                            <option value="" selected="selected">No min</option>
                                                            <option value="50000">50,000</option>
                                                            <option value="60000">60,000</option>
@@ -215,7 +217,7 @@ const selectRadius = '';
                                                            <option value="15000000">15,000,000</option>
                                                            <option value="20000000">20,000,000</option>
                                                          </select>
-                                                         <select className= "dropdown" name="selectPriceMax" id="selectPriceMax">
+                                                         <select className= "dropdown" name="maxPrice" id="maxPRice" onChange={handleChange}>
                                                             <option value="" selected="selected">No max</option>
                                                             <option value="" selected="selected">No min</option>
                                                                                                                        <option value="50000">50,000</option>
@@ -278,7 +280,7 @@ const selectRadius = '';
 
                               <div>
                                  <span className="font-filter">No. of bedrooms</span>
-                                   <select className= "dropdown" name="selectNoOfBedrooms" id="selectNoOfBedrooms">
+                                   <select className= "dropdown" name="minBedrooms" id="minBedrooms" onChange={handleChange}>
                                        <option value="" selected="selected">No min</option>
                                        <option value="0">Studio</option>
                                        <option value="1">1</option>
@@ -287,7 +289,7 @@ const selectRadius = '';
                                        <option value="4">4</option>
                                        <option value="5">5</option>
                                    </select>
-                                   <select className= "dropdown" name="selectNoOfBedrooms" id="selectNoOfBedrooms">
+                                   <select className= "dropdown" name="maxBedrooms" id="maxBedrooms" onChange={handleChange}>
                                        <option value="" selected="selected">No max</option>
                                        <option value="0">Studio</option>
                                        <option value="1">1</option>
@@ -300,7 +302,7 @@ const selectRadius = '';
 
                               <div>
                                   <span className="font-filter">Added to site</span>
-                                    <select className= "dropdown" name="selectNoOfBedrooms" id="selectNoOfBedrooms">
+                                    <select className= "dropdown" name="noOfBedrooms" id="noOfBedrooms" onChange={handleChange}>
                                        <option value="" selected="selected">Anytime</option>
                                        <option value="1">Last 24 hours</option>
                                        <option value="3">Last 3 days</option>
