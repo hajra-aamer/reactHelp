@@ -10,6 +10,8 @@ import { Routes, Route, useNavigate } from "react-router-dom";
 import star from "../star.png";
 import "../styling/App.css";
 import { responseContext } from "../context/responseContext.js";
+import { postcodeContext } from "./../context/postcodeContext";
+import Postcode from "../components/Postcode.jsx";
 
 axios.defaults.xsrfCookieName = "CSRF-TOKEN";
 axios.defaults.xsrfHeaderName = "X-CSRF-Token";
@@ -102,7 +104,7 @@ function App(props) {
 
     try {
       // const response = await axios.post(url, json, { headers: headers });
-      setResponse(response)
+      setResponse(response);
       console.log(response);
       navigateToSale();
     } catch (err) {
@@ -145,79 +147,79 @@ function App(props) {
 
   //        <p>{list}</p>
   const [response, setResponse] = useState({});
+  const [postcode, setPostcode] = useState('');
 
-  
   return (
     <responseContext.Provider value={{ response, setResponse }}>
-      <div className="App">
-        <header className="App-header">
-          <img src={star} className="App-logo" alt="star" />
-          <p className="font">
-            Sale or Rent? Type your postcode below to get started!
-          </p>
-          <textarea
-            className="textbox"
-            name="postcode"
-            value={state.postcode}
-            onChange={handleLocationChange}
-            placeholder="Type postcode here"
-          />
-          <button
-            className="button"
-            value="sale"
-            onClick={HandleSale}
-            data-inline="true"
-          >
-            For Sale
-          </button>
-          <button
-            className="button"
-            value="rent"
-            onClick={navigateToRent}
-            data-inline="true"
-          >
-            To Rent
-          </button>
-          <Routes>
-            <Route
-              path="/sale/*"
-              element={<SalePickFilters location={state.postcode} />}
+      <postcodeContext.Provider value={{ postcode, setPostcode }}>
+        <div className="App">
+          <header className="App-header">
+            <img src={star} className="App-logo" alt="star" />
+            <p className="font">
+              Sale or Rent? Type your postcode below to get started!
+            </p>
+            <Postcode />
+            <button
+              className="button"
+              value="sale"
+              onClick={HandleSale}
+              data-inline="true"
+            >
+              For Sale
+            </button>
+            <button
+              className="button"
+              value="rent"
+              onClick={navigateToRent}
+              data-inline="true"
+            >
+              To Rent
+            </button>
+            <Routes>
+              <Route
+                path="/sale/*"
+                element={<SalePickFilters location={postcode} />}
+              />
+              <Route
+                path="/rent/*"
+                element={<RentPickFilters location={postcode} />}
+              />
+              <Route path="/browse" element={<NavigateToBrowse />} />
+            </Routes>
+            <div>&nbsp;</div>
+            <div>&nbsp;</div>
+            <div>&nbsp;</div>
+            <div>&nbsp;</div>
+            <img className="lineDimensions" src="Line.png" alt="im1" />
+            <p className="font">
+              Confused about properties?<br></br>Ask our AI property expert.
+            </p>
+            <textarea
+              className="textbox"
+              name="question"
+              value={state.question}
+              onChange={handleChange}
+              rows={5}
+              placeholder="Type in what you would like to know..."
             />
-            <Route
-              path="/rent/*"
-              element={<RentPickFilters location={state.postcode} />}
-            />
-            <Route path="/browse" element={<NavigateToBrowse />} />
-          </Routes>
-          <div>&nbsp;</div>
-          <div>&nbsp;</div>
-          <div>&nbsp;</div>
-          <div>&nbsp;</div>
-          <img className="lineDimensions" src="Line.png" alt="im1" />
-          <p className="font">
-            Confused about properties?<br></br>Ask our AI property expert.
-          </p>
-          <textarea
-            className="textbox"
-            name="question"
-            value={state.question}
-            onChange={handleChange}
-            rows={5}
-            placeholder="Type in what you would like to know..."
-          />
-          &nbsp;
-          <button className="button" onClick={handleSubmit} data-inline="true">
-            Ask away
-          </button>
-          &nbsp; &nbsp;
-          {AIresponseData && !isLoading && (
-            <ClipboardCopy copyText={AIresponseData} />
-          )}
-          {isLoading ? <LoadingSpinner /> : ""}
-          <ul>{<HistoryList list={list} />}</ul>
-          &nbsp; &nbsp;
-        </header>
-      </div>
+            &nbsp;
+            <button
+              className="button"
+              onClick={handleSubmit}
+              data-inline="true"
+            >
+              Ask away
+            </button>
+            &nbsp; &nbsp;
+            {AIresponseData && !isLoading && (
+              <ClipboardCopy copyText={AIresponseData} />
+            )}
+            {isLoading ? <LoadingSpinner /> : ""}
+            <ul>{<HistoryList list={list} />}</ul>
+            &nbsp; &nbsp;
+          </header>
+        </div>
+      </postcodeContext.Provider>
     </responseContext.Provider>
   );
 }
