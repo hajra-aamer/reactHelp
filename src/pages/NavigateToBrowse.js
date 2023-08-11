@@ -487,6 +487,9 @@ export default function NavigateToBrowse(props, state) {
                 return (
                   <div key={index}>
                     <p>{item.displayAddress}</p>
+                    <p>{item.addedOrReduced}</p>
+                    <img src={item?.propertyImages?.images[0]?.srcUrl} alt="" />
+
 
 
                   </div>
