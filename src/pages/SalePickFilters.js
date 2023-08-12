@@ -59,13 +59,14 @@ const maxBedrooms = '';
             console.log('minBedrooms is ' + state.minBedrooms)
             console.log('minPRices is ' + state.minPrice)
             console.log('maxPrice is ' + state.maxPrice)
+            console.log('maxDaysSinceAdded is ' + state.maxDaysSinceAdded)
 
             const minBedrooms = state.minBedrooms;
             const maxPrice = state.maxPrice;
             const minPrice = state.minPrice;
             const radius = state.selectRadius;
             const propertyTypes = state.noOfBedrooms;
-            const maxDaysSinceAdded = '';
+            const maxDaysSinceAdded = state.maxDaysSinceAdded;
             const includeSSTC = false;
             const mustHave = '';
             const dontShow = '';
@@ -302,7 +303,7 @@ const maxBedrooms = '';
 
                               <div>
                                   <span className="font-filter">Added to site</span>
-                                    <select className= "dropdown" name="noOfBedrooms" id="noOfBedrooms" onChange={handleChange}>
+                                    <select className= "dropdown" name="maxDaysSinceAdded" id="maxDaysSinceAdded" onChange={handleChange}>
                                        <option value="" selected="selected">Anytime</option>
                                        <option value="1">Last 24 hours</option>
                                        <option value="3">Last 3 days</option>
@@ -323,4 +324,3 @@ const maxBedrooms = '';
 }
 
 export default SalePickFilters;
-
