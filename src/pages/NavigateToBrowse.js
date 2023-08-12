@@ -479,20 +479,23 @@ export default function NavigateToBrowse(props, state) {
   return (
     <responseContext.Provider value={{ response, setResponse }}>
       <div className="App">
-        const number =<p className="font">X number of properties found</p>
+        <p className="font">Properties found for {postcode}</p>
         <button className="button" onClick={handleBrowse} data-inline="true">
           Browse location
         </button>
+        &nbsp;
         {response[0].map((item, index) => {
                 return (
-                  <div key={index}>
+                  <span key={index}>
                     <p>{item.displayAddress}</p>
-                    <p>{item.addedOrReduced}</p>
+                    <p className="font-filter">{item.addedOrReduced}</p>
                     <img src={item?.propertyImages?.images[0]?.srcUrl} alt="" />
+                    &nbsp;
+                    &nbsp;
 
 
 
-                  </div>
+                  </span>
                 );
             })
         }
